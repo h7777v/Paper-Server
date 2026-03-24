@@ -4,7 +4,26 @@
         <meta charset="utf-8">
         <title>Request rejected</title>
         <link rel="icon" href="">
+        <link rel="stylesheet" href="/assets/fonts/inter/main.css">
+        <link rel="stylesheet" href="/assets/styles/reject.css">
     </head>
     <body>
+        <div id="buffer"></div>
+        <div>
+            <div id="icon-circle"></div>
+            <div id="icon-line-1"></div>
+            <div id="icon-line-2"></div>
+        </div>
+        <div>
+            <h1 class="inter center">Your request has been rejected</h1>
+            <h2 class="inter center">
+                <ssr:placeholder name="status"></ssr:placeholder>
+                &nbsp;&nbsp;
+                <ssr:placeholder name="reason"></ssr:placeholder>
+            </h2>
+            <p class="inter center">
+                <ssr:placeholder name="details"></ssr:placeholder>
+            </p>
+        </div>
     </body>
 </html>

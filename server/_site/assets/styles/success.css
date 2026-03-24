@@ -22,7 +22,7 @@ body{
     position: absolute;
     top: 10%;
     left: calc(50% - 50px);
-    background-color: #d20000;
+    background-color: #00a800;
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -30,22 +30,22 @@ body{
 
 #icon-line-1{
     position: absolute;
-    top: calc(10% + 35px);
-    left: calc(50% - 50px + 2.3030399291527175423689206988385px);
+    top: calc(10% + 50px);
+    left: calc(50% - 49px);
     background-color: #ffffff;
     transform: rotate(45deg);
     height: 30px;
-    width: 95.393920141694564915262158602323px;
+    width: 60px;
 }
 
 #icon-line-2{
     position: absolute;
-    top: calc(10% + 35px);
-    left: calc(50% - 50px + 2.3030399291527175423689206988385px);
+    top: calc(10% + 40px);
+    left: calc(50% - 27.5px);
     background-color: #ffffff;
     transform: rotate(-45deg);
     height: 30px;
-    width: 95.393920141694564915262158602323px;
+    width: 80px;
 }
 
 /********************/
@@ -71,4 +71,18 @@ body{
 
 .center{
     text-align: center;
+}
+
+/********************/
+/***** link *********/
+/********************/
+
+a {
+    color: #4da3ff;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+a:hover {
+    color: #82c3ff;
 }
