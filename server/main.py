@@ -140,7 +140,7 @@ class Handler(BaseHTTPRequestHandler):
             mime = "text/plain"
 
         if(path == ""):
-            file = open("./_site/pages/success.html", "rb")
+            file = open("./_site/pages/index.html", "rb")
             content = file.read()
             file.close()
             mime = "text/html"
@@ -210,6 +210,7 @@ class Handler(BaseHTTPRequestHandler):
         if("admin" in data.keys()):
             if("action" in data.keys()):
                 action = data.get("action")
+                openDB(".log", "append", f"[Admin, {ip}, {time.time()}] Ran cmd >>>{action}\n")
                 if(action == "view order"):
                     self.send_response(200)
                     self.send_header("Content-Type", "text/plain")
@@ -306,6 +307,7 @@ class Handler(BaseHTTPRequestHandler):
         }
 
         openDB("order.json", "write", json.dumps(order))
+        openDB(".log", "append", f"[{ip}, {data.get("name")}, {time.time()}] Ordered \"{data.get("type")}\" for ${float(products.get(data.get("type"))):.2f}, priority: {priority}\n")
 
         with open("./_site/pages/success.html", "rt") as f:
             self.send_response(200)
@@ -324,5 +326,6 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     server = HTTPServer(("0.0.0.0", 6060), Handler)
+    openDB(".log", "append", f"[Server, {time.time()}] Server running on port 6060\n")
     print("Server running on port 6060")
     server.serve_forever()

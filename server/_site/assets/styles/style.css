@@ -1,0 +1,77 @@
+/********************/
+/****** pre *********/
+/********************/
+
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+/********************/
+/***** icon *********/
+/********************/
+
+#icon-circle{
+    position: absolute;
+    top: 10%;
+    left: calc(50% - 50px);
+    background-color: #8f8f8f;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+#icon-line{
+    position: absolute;
+    top: calc(10% + 35px);
+    left: calc(50% - 50px + 2.3030399291527175423689206988385px);
+    background-color: #ffffff;
+    height: 30px;
+    width: 95.393920141694564915262158602323px;
+}
+
+/********************/
+/***** font *********/
+/********************/
+
+.inter{
+    font-family: 'Inter';
+}
+
+/********************/
+/***** buffer *******/
+/********************/
+
+#buffer{
+    width: 100%;
+    height: calc(10% + 100px);
+}
+
+/********************/
+/***** assets *******/
+/********************/
+
+.center{
+    text-align: center;
+}
+
+/********************/
+/***** link *********/
+/********************/
+
+a {
+    color: #4da3ff;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+a:hover {
+    color: #82c3ff;
+}
