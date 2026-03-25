@@ -159,10 +159,14 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(content)
 
     def do_POST(self):
+        global LIMITS
         length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(length)
 
         ip = self.client_address[0]
+        forwarded = self.headers.get("X-Forwarded-For")
+        if forwarded:
+            ip = forwarded.split(",")[0].strip()
 
         def get_reject():
             with open("./_site/pages/reject.html", "rt") as f:
@@ -204,7 +208,32 @@ class Handler(BaseHTTPRequestHandler):
         data = {k: v[0] for k, v in data.items()}
 
         if("admin" in data.keys()):
-            print(ip)
+            if("action" in data.keys()):
+                action = data.get("action")
+                if(action == "view order"):
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/plain")
+                    self.end_headers()
+                    self.wfile.write(json.dumps(order, indent=4).encode("utf-8", "ignore"))
+                    return
+                elif(action == "view limit"):
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/plain")
+                    self.end_headers()
+                    self.wfile.write(json.dumps(LIMITS, indent=4).encode("utf-8", "ignore"))
+                elif(action == "reset limit"):
+                    LIMITS = {}
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/plain")
+                    self.end_headers()
+                    self.wfile.write(b"Bruh ok. ")
+                    return
+                else:
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/plain")
+                    self.end_headers()
+                    self.wfile.write(f'Bruh idk what "{action}" does. '.encode("utf-8", "ignore"))
+                    return
             return
 
         if "type" not in data.keys():
@@ -270,7 +299,7 @@ class Handler(BaseHTTPRequestHandler):
         orderId = uuid.uuid4()
         order[str(orderId)] = {
             "priority" : priority, 
-            "pos" : hight, 
+            "pos" : hight+1, 
             "name" : data.get("name"), 
             "type" : data.get("type"), 
             "price" : products.get(data.get("type"))
